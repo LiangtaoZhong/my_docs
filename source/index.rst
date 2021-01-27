@@ -9,26 +9,20 @@ My Documents
 ======================================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: PX4问题
-   :titlesonly:
 
-   
    md/px4
    
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: ROS问题
-   :titlesonly:
 
-   
    md/ROS
    
 .. toctree::
    :maxdepth: 2
    :caption: Linux问题汇总
-   :titlesonly:
 
-   
    md/linux
 
