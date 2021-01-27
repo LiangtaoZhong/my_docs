@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>linux常见问题 &mdash; My Documents  文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="ROS" href="ROS.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> My Documents
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">PX4问题</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="px4.html">常见问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="px4.html#px4rosgazebo">PX4在ROS下进行gazebo仿真</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ROS问题</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ROS.html">ROS</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Linux问题汇总</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">linux常见问题</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">My Documents</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>linux常见问题</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/md/linux.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="linux">
+<h1>linux常见问题<a class="headerlink" href="#linux" title="永久链接至标题">¶</a></h1>
+<div class="section" id="ubuntuip">
+<h2>Ubuntu设置静态IP<a class="headerlink" href="#ubuntuip" title="永久链接至标题">¶</a></h2>
+<p>将linux开发板与电脑网口连接，方便调试，需要将<strong>电脑有线网卡</strong>和<strong>开发板的有线网卡</strong>配置到同一局域网下。操作如下：</p>
+<ol>
+<li><p>打开配置文件</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /etc/network
+vim /interfaces
+</pre></div>
+</div>
+</li>
+<li><p>添加如下配置：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>auto eth0
+iface eth0 inet static
+address <span class="m">192</span>.168.0.11
+gateway <span class="m">192</span>.168.0.1
+netmask <span class="m">255</span>.255.255.0
+</pre></div>
+</div>
+<p>其中<code class="docutils literal notranslate"><span class="pre">eth0</span></code>为要配置的网卡。<code class="docutils literal notranslate"><span class="pre">address</span></code>为IP地址，<code class="docutils literal notranslate"><span class="pre">gateway</span></code>为网关，<code class="docutils literal notranslate"><span class="pre">netmask</span></code>为子网掩码。根据需要设置。</p>
+</li>
+<li><p>测试</p>
+<p>双向互Ping，若能ping通，则在同一局域网。</p>
+<p><strong>需要注意的是有时候linux开发板功能较少，并没有对ping进行相应的处理，这时候用电脑去ping开发板可能会出现不能ping通的情况。</strong></p>
+</li>
+</ol>
+</div>
+<div class="section" id="ubuntu">
+<h2>ubuntu开机自启动<a class="headerlink" href="#ubuntu" title="永久链接至标题">¶</a></h2>
+<ol class="simple">
+<li><p>为程序创建一个<code class="docutils literal notranslate"><span class="pre">.sh</span></code>的启动脚本。例如<code class="docutils literal notranslate"><span class="pre">demorun.sh</span></code>，保存的路径为<code class="docutils literal notranslate"><span class="pre">/root/demorun.sh</span></code>。</p></li>
+<li><p>更改文件权限为可运行<code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">demorun.sh</span></code>。</p></li>
+<li><p>然后把<code class="docutils literal notranslate"><span class="pre">/root/demorun.sh&amp;</span></code>写入<code class="docutils literal notranslate"><span class="pre">/etc/rc.local</span></code>文件中的<code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">0</span></code>前面。</p></li>
+<li><p>其中<code class="docutils literal notranslate"><span class="pre">&amp;</span></code>的的意思为后台运行，否则会阻塞正常开机。</p></li>
+</ol>
+</div>
+<div class="section" id="id1">
+<h2>ubuntu查看和设置环境变量<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h3>查看环境变量<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<ol>
+<li><p><code class="docutils literal notranslate"><span class="pre">env</span></code>
+env命令是environment的缩写，用于列出所有的环境变量</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">export</span></code></p>
+<p>单独使用<code class="docutils literal notranslate"><span class="pre">export</span></code>命令也可以像<code class="docutils literal notranslate"><span class="pre">env</span></code>列出所有的环境变量，不过<code class="docutils literal notranslate"><span class="pre">export</span></code>命令还有其他额外的功能</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$PATH</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$PATH</span></code>用于列出变量<code class="docutils literal notranslate"><span class="pre">PATH</span></code>的值，里面包含了已添加的目录</p>
+</li>
+</ol>
+</div>
+<div class="section" id="id3">
+<h3>设置环境变量<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<ol>
+<li><p>追加某个环境变量的值</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 加到PATH末尾</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/path/to/your/dir
+
+<span class="c1"># 加到PATH开头</span>
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/path/to/your/dir:<span class="nv">$PATH</span>
+</pre></div>
+</div>
+<p><strong>PATH表示要追加到的变量名，注意先后顺序</strong></p>
+</li>
+<li><p>命名一个新的环境变量</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">VAR_NAME</span><span class="o">=</span>value
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h3>环境变量作用域<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<ol class="simple">
+<li><p>当前终端
+打开终端输入<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">VAR_NAME=value</span></code></p></li>
+<li><p>当前用户
+将环境变量的设置语句写入<code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>,然后<code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code></p></li>
+<li><p>所有用户
+将环境变量设置语句写入<code class="docutils literal notranslate"><span class="pre">/etc/profile</span></code>，然后<code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/etc/profile</span></code></p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>双系统共享硬盘<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>有两种方法：</p>
+<blockquote>
+<div><ol class="simple">
+<li><p>先进入Windows再==<strong>重启</strong>==进入ubuntu。</p></li>
+<li><p>关闭windows的快速启动。</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="rc-local">
+<h2>rc.local执行权限<a class="headerlink" href="#rc-local" title="永久链接至标题">¶</a></h2>
+<p>rc.local由init进程调度，所以执行权限为root。</p>
+</div>
+<div class="section" id="id6">
+<h2>ubuntu解压中文名压缩包乱码<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>windows下打包的压缩包为GBK/GB2312编码，Linux为UTF-8编码。因此linux下解压windows压缩包会乱码。解决办法：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>unzip -O GBK xxx.zip
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>创建文件/文件夹快捷方式(创建软链接)<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>其实就是创建文件或者文件夹的==软链接==。方法如下：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo ln -s /src/file /dist/file   <span class="c1">#不加-s为添加硬链接</span>
+</pre></div>
+</div>
+<p>一定要使用<strong>绝对路径</strong>，否则会链接出错。</p>
+</div>
+<div class="section" id="github-fq">
+<h2>GitHub下载加速（亲测有效，前提FQ）<a class="headerlink" href="#github-fq" title="永久链接至标题">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ubuntu 下命令为 expo</span>
+
+<span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://192.168.0.102:10809
+<span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://192.168.0.102:10809
+<span class="nb">export</span> <span class="nv">http_proxy_user</span><span class="o">=</span>user
+<span class="nb">export</span> <span class="nv">http_proxy_pass</span><span class="o">=</span>pass
+<span class="nb">export</span> <span class="nv">https_proxy_user</span><span class="o">=</span>user
+<span class="nb">export</span> <span class="nv">https_proxy_pass</span><span class="o">=</span>pass
+
+<span class="c1">#windows cmd</span>
+<span class="nb">set</span> <span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:10809
+<span class="nb">set</span> <span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:10809
+<span class="nb">set</span> <span class="nv">http_proxy_user</span><span class="o">=</span>user
+<span class="nb">set</span> <span class="nv">http_proxy_pass</span><span class="o">=</span>pass
+<span class="nb">set</span> <span class="nv">https_proxy_user</span><span class="o">=</span>user
+<span class="nb">set</span> <span class="nv">https_proxy_pass</span><span class="o">=</span>pass
+
+<span class="c1"># 恢复</span>
+<span class="nb">set</span> <span class="nv">http_proxy</span><span class="o">=</span>
+<span class="nb">set</span> <span class="nv">https_proxy</span><span class="o">=</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bashrc">
+<h2>恢复误删的.bashrc<a class="headerlink" href="#bashrc" title="永久链接至标题">¶</a></h2>
+<p>备份文件在<code class="docutils literal notranslate"><span class="pre">/etc/skel/</span></code>，复制到用户目录下就好。</p>
+</div>
+<div class="section" id="arm">
+<h2>树莓派等arm架构更新清华源<a class="headerlink" href="#arm" title="永久链接至标题">¶</a></h2>
+<div class="section" id="x86">
+<h3>x86架构<a class="headerlink" href="#x86" title="永久链接至标题">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span>
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+<span class="c1"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse</span>
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+<span class="c1"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse</span>
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+<span class="c1"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse</span>
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+<span class="c1"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse</span>
+
+<span class="c1"># 预发布软件源，不建议启用</span>
+<span class="c1"># deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse</span>
+<span class="c1"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>arm架构<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>将x86中的<code class="docutils literal notranslate"><span class="pre">https://mirrors.tuna.tsinghua.edu.cn/ubuntu/</span></code>改为<code class="docutils literal notranslate"><span class="pre">https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/</span></code>即可。</p>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>ubuntu改变屏幕亮度<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">add-apt-repository</span> <span class="pre">ppa:apandada1/brightness-controller</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">update</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">brightness-controller</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">brightness-controler</span></code></p></li>
+</ol>
+</div>
+<div class="section" id="ubuntuu">
+<h2>ubuntu挂载和卸载U盘<a class="headerlink" href="#ubuntuu" title="永久链接至标题">¶</a></h2>
+<ol>
+<li><p>查看U盘设备 形如<code class="docutils literal notranslate"><span class="pre">/dev/sd*</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo fdisk -l 
+</pre></div>
+</div>
+</li>
+<li><p>挂载U盘</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo mount /dev/sd* /mnt <span class="c1"># mount [设备] [挂载点]</span>
+</pre></div>
+</div>
+</li>
+<li><p>卸载U盘</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo umount /dev/sd* <span class="c1"># umount [设备]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="ubuntu-nvidia">
+<h2>ubuntu NVIDIA驱动<a class="headerlink" href="#ubuntu-nvidia" title="永久链接至标题">¶</a></h2>
+<div class="section" id="ubuntunvidia">
+<h3>ubuntu安装NVIDIA驱动<a class="headerlink" href="#ubuntunvidia" title="永久链接至标题">¶</a></h3>
+<ol>
+<li><p>退出图形界面  <code class="docutils literal notranslate"><span class="pre">Ctrl+ALT+F1</span></code>，进入命令行界面
+如果第一次安装先禁用系统自带的驱动</p>
+<blockquote>
+<div><ol>
+<li><p>sudo vim /etc/modrpobe.d/black-nouveau.conf  打开配置文件</p></li>
+<li><p>添加如下</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blacklist</span> <span class="n">nouveau</span>
+<span class="n">options</span> <span class="n">nouveau</span> <span class="n">modeset</span><span class="o">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+<li><p>lsmod | grep nouveau 命令无返回结果表示禁用成功</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>停用服务</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo service lightdm stop
+</pre></div>
+</div>
+</li>
+<li><p>卸载驱动</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt-get remove --purge nvidia*
+</pre></div>
+</div>
+</li>
+<li><p>安装驱动</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo ./NVIDIA-Linux-x86_64-*.run –no-opengl-files
+</pre></div>
+</div>
+<p>只安装驱动文件，不安装OpenGL文件。这个参数最重要</p>
+</li>
+<li><p>重新打开服务</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo service lightdm start
+</pre></div>
+</div>
+</li>
+<li><p>重启</p></li>
+</ol>
+</div>
+<div class="section" id="id10">
+<h3>查看显卡信息<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<ol>
+<li><p>查看 Nvidia 显卡利用率：显存占用和算力情况</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>watch -n <span class="m">0</span>.5 nvidia-smi <span class="c1">#0.5 秒更新一次显卡利用情况，并查看 NVIDIA 驱动版本</span>
+</pre></div>
+</div>
+</li>
+<li><p>查看 Cuda 版本</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cat  /usr/local/cuda/version.txt
+</pre></div>
+</div>
+</li>
+<li><p>查看 Cudnn 版本</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cat /usr/local/cuda/include/cudnn.h <span class="p">|</span> grep CUDNN_MAJOR -A <span class="m">2</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="nvcc-nvidia-smi">
+<h3>nvcc 正常、nvidia-smi失败<a class="headerlink" href="#nvcc-nvidia-smi" title="永久链接至标题">¶</a></h3>
+<ol>
+<li><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo apt-get install dkms  
+</pre></div>
+</div>
+</li>
+<li><p>通过<code class="docutils literal notranslate"> <span class="pre">cd</span> <span class="pre">/usr/src</span>&#160; <span class="pre">&amp;&amp;</span>&#160; <span class="pre">ls</span></code>  查看对应安装的驱动版本</p></li>
+<li><p>重新生成对应nvidia的驱动模块</p>
+<p>sudo dkms install -m nvidia -v +对应的驱动版本号（我是440.64）即为：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo dkms install -m nvidia -v <span class="m">440</span>.64  
+</pre></div>
+</div>
+</li>
+<li><p>再次执行：NVIDIA-SMI 即可</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="ROS.html" class="btn btn-neutral float-left" title="ROS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, LiangtaoZhong.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
