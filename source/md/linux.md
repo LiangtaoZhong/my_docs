@@ -1,4 +1,4 @@
-# linux常见问题
+# Linux常见问题
 
 ##  Ubuntu设置静态IP
 
