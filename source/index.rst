@@ -21,8 +21,11 @@ My Documents
    md/ROS
    
 .. toctree::
-   :maxdepth: 2
-   :caption: Linux问题汇总
+   :maxdepth: 3
+   :caption: Linux
 
    md/linux
+   char_device.rst
 
+
+   
