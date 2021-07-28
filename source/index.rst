@@ -27,5 +27,10 @@ My Documents
    md/linux
    char_device.rst
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Makefile示例
+
+   Makefile.rst
 
    
